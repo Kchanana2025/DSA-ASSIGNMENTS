@@ -1,3 +1,4 @@
+// I NEED TO CHECK SOLUTIONS KI KOI CHEZ MISS OUT TOH NAI KI-SOLUTIONS WERE NOT PRESENT FOR THSI ASSIGNMENT-(I DID WHATEVER WHAT WAS TAUGHT IN CLASS)
 //) Develop a Menu driven program to demonstrate the following operations of Arrays
 // 1.CREATE
 // 2.DISPLAY
@@ -5,7 +6,7 @@
 // 4.DELETE
 // 5.SEARCH
 // 6.EXIT
-// I NEED TO CHECK SOLUTIONS KI KOI CHEZ MISS OUT TOH NAI KI
+
 #include <iostream>
 using namespace std;
 int delete_num(int arr[], int n) // delete is inbuilt keyword
@@ -44,21 +45,29 @@ void display(int arr[], int n)
         cout << arr[i];
     }
 }
-int insert(int arr[30], int n)
+int insert(int arr[30], int n) //iss 30 ki koi value nai hai because arr is just pointer isko int* arr/int arr[]/int arr[40]/int arr[30]
+// kuch bhi likho
 {
     int j;
     int flag = 0;
     int i, val;
-    // if(n==0)
-    cout << "ENTER THE POSITION AT WHICH YOU WANT TO INSERT ELEMENT";
-    cin >> j;
-    cin >> val;
-    for (i = n - 1; i >= j; i--)
+    if (n == 30)
     {
-        arr[i + 1] = arr[i];
+        cout << "SORRY MAX SIZE OF ARRAY HAS REACHED YOU CANT INSERT"; // INSERT OPERATIONS KRTE KRTE YA INITIALLY HI SIZE 30 PAHUCH GAYE TOH AB AUR ELEMENTS NAI DAALENGE
+        return n;
     }
-    arr[j] = val;
-    return n + 1;
+    else
+    {
+        cout << "ENTER THE POSITION AT WHICH YOU WANT TO INSERT ELEMENT";
+        cin >> j;
+        cin >> val;
+        for (i = n - 1; i >= j; i--)
+        {
+            arr[i + 1] = arr[i];
+        }
+        arr[j] = val;
+        return n + 1;
+    }
 }
 void search(int *arr, int n)
 {
