@@ -45,7 +45,7 @@ void display(int arr[], int n)
         cout << arr[i];
     }
 }
-int insert(int arr[30], int n) //iss 30 ki koi value nai hai because arr is just pointer isko int* arr/int arr[]/int arr[40]/int arr[30]
+int insert(int arr[30], int n) // iss 30 ki koi value nai hai because arr is just pointer isko int* arr/int arr[]/int arr[40]/int arr[30]
 // kuch bhi likho
 {
     int j;
@@ -53,19 +53,22 @@ int insert(int arr[30], int n) //iss 30 ki koi value nai hai because arr is just
     int i, val;
     if (n == 30)
     {
-        cout << "SORRY MAX SIZE OF ARRAY HAS REACHED YOU CANT INSERT"; // INSERT OPERATIONS KRTE KRTE YA INITIALLY HI SIZE 30 PAHUCH GAYE TOH AB AUR ELEMENTS NAI DAALENGE
+        cout << "SORRY MAX SIZE OF ARRAY HAS REACHED YOU CANT INSERT"; // INSERT OPERATIONS KRTE KRTE /YA phir INITIALLY HI SIZE 30 PAHUCH jAYE(shuru mein hi 30 elements daaldo) TOH phir AUR ELEMENTS NAI DAl payenge
         return n;
     }
     else
     {
         cout << "ENTER THE POSITION AT WHICH YOU WANT TO INSERT ELEMENT";
         cin >> j;
+        cout << "ENTER THE VALUE OF ELEMENT TO BE INSERTED";
+
         cin >> val;
         for (i = n - 1; i >= j; i--)
         {
             arr[i + 1] = arr[i];
         }
         arr[j] = val;
+        display(arr, n + 1); // after insertion we display the array as well(this is optional)
         return n + 1;
     }
 }
@@ -128,7 +131,7 @@ int main()
         case 6:
             exit(0); // this is how we use exit it is used to terminate the program
         default:
-            //  The default and break are optional in the switch in C++.
+            //  The default and break are optional in the switch in C++.(par dono zaruri hote hain depending upon hm kya sawal kr rhe hain)default:is ki koi case na ho toh idhar aa gaye and break is for ki bhyi ek case execute hone ke baad neeche ke sare cases execute na ho
             cout << "wrong choice entered";
         }
         cout << endl;
