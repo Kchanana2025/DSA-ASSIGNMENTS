@@ -5,10 +5,10 @@
 // 4.DELETE
 // 5.SEARCH
 // 6.EXIT
-
+// I NEED TO CHECK SOLUTIONS KI KOI CHEZ MISS OUT TOH NAI KI
 #include <iostream>
 using namespace std;
-int delete(int arr[], int n)
+int delete_num(int arr[], int n) // delete is inbuilt keyword
 {
     int i;
     int j;
@@ -53,7 +53,7 @@ int insert(int arr[30], int n)
     cout << "ENTER THE POSITION AT WHICH YOU WANT TO INSERT ELEMENT";
     cin >> j;
     cin >> val;
-    for (i = n - 1; i >= j; i++)
+    for (i = n - 1; i >= j; i--)
     {
         arr[i + 1] = arr[i];
     }
@@ -69,11 +69,13 @@ void search(int *arr, int n)
     for (i = 0; i < n; i++)
     {
         if (arr[i] == m)
+        {
             flag = 1;
-        break;
+            break;
+        }
     }
     if (flag == 1)
-        cout << "Element is presnt at " << i << "th"
+        cout << "Element is presnt at " << i << " th "
              << "index";
     else
         cout << "element not present";
@@ -83,26 +85,47 @@ int main()
 {
     int arr[30];
     int a;
-    cout << "1.CREATE";
-    cout << "2.DISPLAY";
-    cout << "3.INSERT";
-    cout << "4.DELETE";
-    cout << "SEARCH";
-    cout << "EXIT";
-    cout << "ENTER YOUR CHOICE";
-    cin >> a;
-    switch (a)
+    int n;
+    char ch;
+    do
     {
-    case 1:
-        int n = create(arr);
-    case 2:
-        display(arr, n);
-    case 3:
-        insert(arr, n);
-    case 4:
-        int n = delete (arr, n);
-    case 5:
-        search(arr, n);
-    }
+
+        cout << "1.CREATE" << endl;
+        cout << "2.DISPLAY" << endl;
+        cout << "3.INSERT" << endl;
+        cout << "4.DELETE" << endl;
+        cout << "5.SEARCH" << endl;
+        cout << "6.EXIT" << endl;
+        cout << "ENTER YOUR CHOICE" << endl;
+        cin >> a;
+        switch (a)
+        {
+        case 1:
+            n = create(arr);
+            break; // hm break lgate hai because break na lgane pr neeche ke sare cases execute ho jate hain
+        case 2:
+            display(arr, n);
+            break;
+
+        case 3:
+            n = insert(arr, n);
+            break;
+        case 4:
+            n = delete_num(arr, n);
+            break;
+        case 5:
+            search(arr, n);
+            break;
+        case 6:
+            exit(0); // this is how we use exit it is used to terminate the program
+        default:
+            //  The default and break are optional in the switch in C++.
+            cout << "wrong choice entered";
+        }
+        cout << endl;
+        cout << "do you wish to continue" << endl;
+        cin >> ch;
+        cout << endl;
+    } while (ch != 'n'); // while ke baad semicolon aata hai
     return 0;
 }
