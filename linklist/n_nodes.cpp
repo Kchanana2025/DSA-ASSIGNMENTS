@@ -21,7 +21,7 @@ node *takeinput() // is function ka kaam hai to create link list and to return h
     cout << "ENTER DATA";
     cin >> data;
     node *head = NULL; // initially null rakhte hai taki neeche jaake filter lga ske ki bhai agr head null hai toh head mein first node ka address daal do
-    node *tail = NULL; // tail bhi use krege taki while loop ki vjah se hmari code ki complexity se n sqare se ghatke n ho jaye
+    node *tail = NULL; // tail bhi use krege taki while loop ki vjah se hmari code ki complexity se n sqare se ghatke n ho jaye(tail na use krne pe nayi node daalne ke lie baar baar last node tak traverse krna padhta tha)
     while (data != -1)
     {
         node *newnode = new node(data); // isko dyanmically allocate kia hai bcz while loop khtm hone ke baad apki node deallocate na ho jaye
