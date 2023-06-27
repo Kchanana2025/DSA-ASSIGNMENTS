@@ -36,18 +36,8 @@ node *takeinput()
     }
     return head;
 }
-node *insertion_beg(node *head)
-{
-    // node* temp=head;
-    int data;
-    cout << "ENTER DATA";
-    cin >> data;
-    node *newnode = new node(data);
-    newnode->next = head;
-    head = newnode;
-    return head;
-}
-void insert_mid(node *head)
+
+void insert_mid_pos(node *head)
 {
     int data;
     int position;
@@ -64,59 +54,28 @@ void insert_mid(node *head)
     newnode->next = temp->next;
     temp->next = newnode;
 }
-node *insert_end(node *head)
+void insert_mid_after_value(node *head)
 {
-    int data;
-    cin >> data;
-    node *newnode = new node(data);
-
+    int data_to_be_inserted;
+    int value_after;
+    cout << "Enter that value after which you wish to insert data";
+    cin >> value_after;
+    cout << "ENTER DATA";
+    cin >> data_to_be_inserted;
     node *temp = head;
-    while (temp->next != NULL)
+    node *newnode = new node(data_to_be_inserted);
+    while (temp->data != value_after)
     {
         temp = temp->next;
     }
+    // jo temp iss loop se bahar niklega ussi ke aage hmien apna data_to_be_inserted lgana hai
+    newnode->next = temp->next;
     temp->next = newnode;
-    // confirm krlo ye// no point of updating tail we are using tail only in inputing link list aur wahan hm tail return kr ni skte-> therefore badmein hamien ek loop toh chalana hi padhega end of link list ko reach krne ke lie direct tail nai use kr paenge
-    // head toh return krna hi padhega akele tail ka kya karoge isliye poora loop chalao
 }
-node *deletion_beg(node *head)
+node *insert_mid_before_value(node *head)
 {
-    node *temp = head;
-    head = head->next;
-    delete temp;
-    return head;
 }
-node *deletion_mid(node *head)
-{
-    node *temp = head;
-    int pos;
-    cin >> pos;
-    int j = 0;
-    while (temp != NULL && j < pos - 1)
-    {
-        temp = temp->next;
-        j++;
-    }
-    if (temp->next != NULL)
-    {
-        node *a = temp->next;
-        node *b = a->next;
-        temp->next = b;
-        delete a;
-    }
-}
-node *end(node *head)
-{
-    node *temp = head;
-    while (temp->next->next != NULL)
-    {
-        temp = temp->next;
-    }
-    // after end of loop temp is at second last node
-    node *a = temp->next;
-    delete a;
-    // no need to update tail,its not even there in memory it was deallocated with end of take input function
-}
+
 void print(node *head)
 {
     node *temp = head;
@@ -138,30 +97,18 @@ int main()
         cout << "1.Insertion at the beginning" << endl;
         cout << "2.Insertion in between." << endl;
         cout << "3. Insertion at end" << endl;
-        cout << "4. deletion at beg" << endl;
-        cout << "5. deletion at mid" << endl;
-        cout << "6. deletion at end" << endl;
         cout << "8.Print the Link list" << endl;
         cin >> a;
         switch (a)
         {
         case 1:
-            head = insertion_beg(head);
+            insert_mid_pos(head);
             break;
         case 2:
-            insert_mid(head);
+            insert_mid_after_value(head);
             break;
         case 3:
-            insert_end(head);
-            break;
-        case 4:
-            deletion_beg(head);
-            break;
-        case 5:
-            deletion_beg(head);
-            break;
-        case 6:
-            deletion_beg(head);
+            insert_mid_before_value(head);
             break;
 
         case 8:
