@@ -19,6 +19,7 @@ public:
         if (top == capacity - 1)
         {
             cout << "stack is full";
+            return;
         }
         top++;
         head[top] = element;
@@ -28,6 +29,7 @@ public:
         if (top == -1)
         {
             cout << "STACK UNDERFLOW";
+            return '\0';
         }
         int temp = head[top];
         top--;
