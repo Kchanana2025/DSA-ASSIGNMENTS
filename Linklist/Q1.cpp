@@ -64,7 +64,7 @@ void insert_mid(node *head)
     newnode->next = temp->next;
     temp->next = newnode;
 }
-node *insert_end(node *head)
+void insert_end(node *head)
 {
     int data;
     cin >> data;
@@ -86,7 +86,7 @@ node *deletion_beg(node *head)
     delete temp;
     return head;
 }
-node *deletion_mid(node *head)
+void deletion_mid(node *head)
 {
     node *temp = head;
     int pos;
@@ -105,7 +105,7 @@ node *deletion_mid(node *head)
         delete a;
     }
 }
-node *end(node *head)
+void deletion_end(node *head)
 {
     node *temp = head;
     while (temp->next->next != NULL)
@@ -125,6 +125,24 @@ void print(node *head)
         cout << temp->data << " ";
         temp = temp->next;
     }
+}
+void search(node *head)
+{
+    int data;
+    cin >> data;
+    node *temp = head;
+    int i = 0;
+    while (temp != NULL)
+    {
+        if (temp->data == data)
+        {
+            cout << "element found";
+            break;
+        }
+        i++;
+        temp = temp->next;
+    }
+    cout << "position" << i;
 }
 int main()
 {
@@ -155,15 +173,17 @@ int main()
             insert_end(head);
             break;
         case 4:
-            deletion_beg(head);
+            head = deletion_beg(head);
             break;
         case 5:
-            deletion_beg(head);
+            deletion_mid(head);
             break;
         case 6:
-            deletion_beg(head);
+            deletion_end(head);
             break;
-
+        case 7:
+            search(head);
+            break;
         case 8:
             print(head);
             break;
