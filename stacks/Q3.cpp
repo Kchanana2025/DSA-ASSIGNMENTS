@@ -1,3 +1,4 @@
+// void mein return krne ke lie we only use return bss
 #include <iostream>
 using namespace std;
 class stack_using_array
@@ -18,6 +19,7 @@ public:
         if (top == capacity - 1)
         {
             cout << "stack is full";
+            return;
         }
         top++;
         head[top] = element;
@@ -27,6 +29,7 @@ public:
         if (top == -1)
         {
             cout << "STACK UNDERFLOW";
+            return '/0';
         }
         int temp = head[top];
         top--;

@@ -59,7 +59,7 @@ void printIthNode(node *head, int i)
 node *delete_occurances(node *head, int data)
 {
     if (head == NULL)
-        return;
+        return NULL;
     node *dummy = new node(-1);
     // dummy node bnai hai algo ko generlize krne ke lie dummy bnane se hoga ye ki ab aap sari nodes pe similarly
     //  work kr paoge waise hota kya h ki hum deletion ke waqt first node ko alag treat krte hain baki ki nodes ko alag treat krte hain
@@ -74,7 +74,10 @@ node *delete_occurances(node *head, int data)
             delete temp;
         }
         // nai toh aage  badh jao
-        tail = tail->next;
+        else
+        {
+            tail = tail->next;
+        }
     }
     return dummy->next;
 }

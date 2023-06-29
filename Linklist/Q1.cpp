@@ -88,6 +88,7 @@ node *deletion_beg(node *head)
 }
 void deletion_mid(node *head)
 {
+    // indexes must not be 0 and end
     node *temp = head;
     int pos;
     cin >> pos;
@@ -97,7 +98,7 @@ void deletion_mid(node *head)
         temp = temp->next;
         j++;
     }
-    if (temp->next != NULL)
+    if (temp != NULL && temp->next != NULL) // it should not be last node because below we have written code for index/pos=0 to pos=n-2
     {
         node *a = temp->next;
         node *b = a->next;
@@ -114,6 +115,10 @@ void deletion_end(node *head)
     }
     // after end of loop temp is at second last node
     node *a = temp->next;
+    if (a != NULL)
+    {
+        temp->next = a->next;
+    }
     delete a;
     // no need to update tail,its not even there in memory it was deallocated with end of take input function
 }

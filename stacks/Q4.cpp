@@ -1,4 +1,7 @@
 // inflix to postfix
+// data type pe dhyan do
+// return nai kr rakha tha maine edge cases ke baad (stack is empty)/(stack is full ke baad)
+// while ()loop mein peek ke baad pop krna bhool gayi
 #include <iostream>
 using namespace std;
 #include <iostream>

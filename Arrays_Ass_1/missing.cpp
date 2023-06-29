@@ -3,7 +3,7 @@
 using namespace std;
 void missing(int *arr, int n)
 {
-    for (int i = 0; i < n - 1; i++)
+    for (int i = 0; i < n - 1; i++) // ye loop n-2 th index tak chalega yaad rakho
     {
         if (arr[i + 1] - arr[i] != 1)
         {

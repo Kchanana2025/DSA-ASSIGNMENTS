@@ -1,3 +1,5 @@
+// kisi bhi node ko jiska NULL hone ka possibility ho wo ek baar check kr lia kro ->/. krwane se phle ki kahin wo NULL toh nai hai
+// Node *head aise declarekia krow naki node* head
 #include <iostream>
 using namespace std;
 class Node
@@ -17,8 +19,10 @@ public:
     }
 };
 //  insert a node at the front of the linked list
-Node *push(Node *head)
+Node *push_front(Node *head)
 {
+    int data;
+    cin >> data;
     Node *newnode = new Node(10);
     // newnode->data = data; //NO NEED BECUASE IN CONTRUCTOR WE ARE ALREADY DOING THIS
     newnode->next = head;
@@ -30,7 +34,46 @@ Node *push(Node *head)
     head = newnode;
     return head;
 }
-void print(Node *head)
+void push_after(Node *head, Node *previous)
+{
+    int data;
+    cin >> data;
+    Node *newnode = new Node(data);
+    if (previous != NULL)
+    {
+        newnode->next = previous->next;
+        previous->next = newnode;
+    }
+    newnode->prev = previous;
+    if (newnode->next != NULL)
+        newnode->next->prev = newnode;
+}
+void push_before(Node *head, Node *front)
+{
+    if (front != NULL)
+    {
+        cout << "next node cant be NULL";
+        return;
+    }
+    Node *newnode = new Node(10);
+
+    newnode->next = front;
+
+    newnode->prev = front->prev;
+    front->prev = newnode;
+    if (newnode->prev != NULL)
+    {
+        newnode->prev->next = newnode;
+    }
+    else
+    {
+        head = newnode;
+    }
+}
+void_end
+
+    void
+    print(Node *head)
 {
     Node *temp = head;
     while (temp != NULL)
@@ -42,7 +85,9 @@ void print(Node *head)
 int main()
 {
     Node *head = new Node(20);
-    head = push(head);
+    head = push_front(head);
+    push_after(head, head->next);
+    // push_end(head);
     print(head);
     return 0;
 }
