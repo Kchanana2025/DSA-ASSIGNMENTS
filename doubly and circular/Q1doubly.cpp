@@ -19,6 +19,31 @@ public:
         this->prev = NULL;
     }
 };
+node *takeinput()
+{
+    int data;
+    cout << "ENTER DATA";
+    cin >> data;
+    node *head = NULL;
+    while (data != -1)
+    {
+        node *newnode = new node(data);
+        if (head == NULL)
+        {
+            head = newnode;
+        }
+        else
+        {
+            newnode->next = head;
+            head->prev = newnode;
+            head = newnode;
+        }
+
+        cin >> data;
+    }
+    return head;
+}
+
 //  insert a node at the front of the linked list
 node *insert_beg(node *head, int num) // num is value whose node we wish to insert
 {
