@@ -165,7 +165,31 @@ node *delete_any_node(node *head, int num, int value)
     }
     return head;
 }
-
+void search(node *head, int num)
+{
+    if (head == NULL)
+    {
+        cout << "Link list is empty";
+    }
+    else
+    {
+        node *temp = head;
+        int i = 0;
+        while (temp != NULL && temp->data != num)
+        {
+            temp = temp->next;
+            i++;
+        }
+        if (temp == NULL)
+        {
+            cout << "node is not present in the link list";
+        }
+        else
+        {
+            cout << "Node is present at index" << i;
+        }
+    }
+}
 void print(Node *head)
 {
     Node *temp = head;
@@ -179,9 +203,6 @@ void print(Node *head)
 int main()
 {
     Node *head = new Node(20);
-    head = push_front(head);
-    push_after(head, head->next);
-    // push_end(head);
     print(head);
     return 0;
 }
