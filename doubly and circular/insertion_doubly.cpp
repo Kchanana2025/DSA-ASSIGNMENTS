@@ -19,6 +19,32 @@ public:
     }
 };
 //  insert a node at the front of the linked list
+node *insert_beg(node *head, int num) // num is value whose node we wish to insert
+{
+    node *newnode = new node(num); // we created a new node
+    if (head == NULL)
+    {
+        head = newnode;
+        return head;
+    }
+    newnode->next = head;
+    head->prev = newnode;
+    head = newnode;
+    return head;
+}
+node *insert_end(node *head, int num)
+{
+    node *head = newnode node(num);
+    if (head == NULL)
+    {
+        head = newnode;
+        return head;
+    }
+    while (temp->next != NULL)
+    {
+    }
+}
+
 Node *push_front(Node *head)
 {
     int data;
