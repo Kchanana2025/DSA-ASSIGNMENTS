@@ -1,5 +1,6 @@
 // kisi bhi node ko jiska NULL hone ka possibility ho wo ek baar check kr lia kro ->/. krwane se phle ki kahin wo NULL toh nai hai
 // Node *head aise declarekia krow naki node* head
+// phle normal code likha kro uske baad edge cases
 #include <iostream>
 using namespace std;
 class Node
@@ -124,6 +125,35 @@ void delete_end(node *head)
             node *a = temp;
             temp->prev->next = NULL;
             delete a;
+        }
+    }
+}
+void delete_any_node(node *head, int num, int value)
+{
+    if (head == NULL)
+    {
+        cout << "List is empty";
+    }
+    else
+    {
+        node *newnode = new node(num);
+        node *temp = head;
+        while (temp != NULL && temp->data != value)
+        {
+            temp = temp->next;
+        }
+        if (temp == NULL)
+        {
+            cout << "Node is not present";
+        }
+        if (temp == head)
+        {
+        }
+        else
+        {
+            temp->prev->next = temp->next;
+            node *a = temp->next;
+            a->prev = temp->prev;
         }
     }
 }
