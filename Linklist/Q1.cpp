@@ -51,7 +51,7 @@ node *insertion_beg(node *head, int data)
     return head;
 }
 
-void insert_mid(node *head, int value, int num) // value is value jiske baad insert krna hai and num is value jisko insert krna hai
+node *insert_mid(node *head, int value, int num) // value is value jiske baad insert krna hai and num is value jisko insert krna hai
 {
     node *newnode = new node(num);
     if (head == NULL)
@@ -59,6 +59,7 @@ void insert_mid(node *head, int value, int num) // value is value jiske baad ins
         head = newnode;
         return head;
     }
+    node *temp = head;
     while (temp != NULL && temp->data != value)
     {
         temp = temp->next;
@@ -148,17 +149,47 @@ void deletion_end(node *head, int num)
         head = NULL;
         delete temp;
     }
-    while (temp->next->next != NULL)
+    else
     {
-        temp = temp->next;
-    }
-    // after end of loop temp is at second last node
-    node *a = temp->next;
+        while (temp->next->next != NULL)
+        {
+            temp = temp->next;
+        }
+        // after end of loop temp is at second last node
+        node *a = temp->next;
 
-    temp->next = NULL;
-    delete a;
+        temp->next = NULL;
+        delete a;
+    }
 
     // no need to update tail,its not even there in memory it was deallocated with end of take input function
+}
+void deletion_end(node *head, int num)
+{
+    node *prev;
+    if (head == NULL)
+    {
+        cout << "Link list is empty";
+    }
+    else
+    {
+        node *temp = head;
+        while (temp->next != NULL)
+        {
+            prev = temp;
+            temp = temp->next;
+        }
+        if (temp == head) // only 1 node is there in link list
+        {
+            head = NULL;
+            delete temp;
+        }
+        else
+        {
+            prev->next = NULL;
+            delete temp;
+        }
+    }
 }
 void print(node *head)
 {
@@ -204,7 +235,7 @@ void search(node *head, int num)
         }
     }
 }
-void search(node *head, int num)
+void search_another_method(node *head, int num)
 {
     if (head == NULL)
         cout << "LINK LIST IS EMPTY";
@@ -233,6 +264,8 @@ int main()
     // variable and functions defined in public section of class are accessible in int main() but functions and variables defined outside class and outside main() are inaccessible in int main()
     int a;
     char ch;
+    int num;   // value jisko insert krna hoe
+    int value; // jiske baad insert krna padhe
     node *head = takeinput();
     do
     {
@@ -248,25 +281,29 @@ int main()
         switch (a)
         {
         case 1:
-            head = insertion_beg(head);
+            cin >> num;
+            head = insertion_beg(head, num);
             break;
         case 2:
-            insert_mid(head);
+            cin >> num; // node after which you wish to insert value OR node which you wish to delete
+            cin >> value;
+            insert_mid(head, value, num);
             break;
         case 3:
-            insert_end(head);
+            cin >> num;
+            insert_end(head, num);
             break;
         case 4:
-            head = deletion_beg(head);
+            head = deletion_beg(head, num);
             break;
         case 5:
-            deletion_mid(head);
+            deletion_mid(head, num);
             break;
         case 6:
-            deletion_end(head);
+            deletion_end(head, num);
             break;
         case 7:
-            search(head);
+            search(head, num);
             break;
         case 8:
             print(head);
