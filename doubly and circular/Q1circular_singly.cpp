@@ -91,7 +91,7 @@ node *insert_after_given_value(node *head, int num, int value)
     else
     {
         node *temp1 = head;
-        while (temp1->next ! = head && temp->data != value)
+        while (temp1->next != head && temp1->data != value)
         {
             temp1 = temp1->next;
         }
@@ -123,7 +123,7 @@ node *delete_begin(node *head)
     }
     if (temp1 == head) // ye sare edge cases while loop ke neeche hi likha kro smjhne mein aasani hoti hai like for eg agr temp1 hai hi head toh mtlb wo aage hi badha toh mtlb it is first node
     {                  // there is only one node
-        head = NULL
+        head = NULL;
     }
     else
     {
@@ -232,10 +232,10 @@ void print(node *head)
         node *temp1 = head;
         while (temp1->next != head)
         {
-            cout << temp->data << " ";
-            temp = temp->next;
+            cout << temp1->data << " ";
+            temp1 = temp1->next;
         }
-        temp->data << endl; // last node ka data
+        cout << temp1->data << endl; // last node ka data
     }
 }
 
