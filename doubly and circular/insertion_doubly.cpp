@@ -40,9 +40,17 @@ node *insert_end(node *head, int num)
         head = newnode;
         return head;
     }
-    while (temp->next != NULL)
+    node *temp = head;
+    while (temp->next != NULL) // jab tak last node pr na aa jaye
     {
+        temp = temp->next;
     }
+    temp->next = newnode;
+    newnode->prev = temp;
+    return head;
+}
+node *insert_at_random_val(node *head, int num, int value)
+{
 }
 
 Node *push_front(Node *head)
