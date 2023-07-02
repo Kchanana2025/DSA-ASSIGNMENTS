@@ -90,11 +90,12 @@ node *insert_after_given_value(node *head, int num, int value)
     }
     else
     {
+        node *temp1 = head;
         while (temp1->next ! = head && temp->data != value)
         {
-            temp = temp->next;
+            temp1 = temp1->next;
         }
-        if (temp->next == head && temp->data != value)
+        if (temp1->next == head && temp1->data != value)
         {
             cout << "node is not present";
         }
@@ -133,7 +134,7 @@ node *delete_begin(node *head)
     }
     return head;
 }
-//***************************************************
+
 void delete_end(node *head)
 {
     node *temp = head;
@@ -146,21 +147,25 @@ void delete_end(node *head)
     else
     {
         node *pre = head;
-        node *temp = head;
-        while (temp->next != head)
+        node *temp1 = head;
+        while (temp1->next != head)
         {
-            pre = temp;
-            temp = temp->next;
+            pre = temp1;
+            temp1 = temp1->next;
         }
-        if (temp == head) // agar ek hi node present ho
+        if (temp1 == head) // agar ek hi node present ho
         {
             head = NULL;
         }
-        pre->next = temp->next;
-        delete temp;
+        else // normal case
+        {
+            pre->next = temp1->next; // or pre->next=head;
+            delete temp1;
+        }
     }
 }
-node *delete_any_node(node *head, int num, int value)
+
+node *delete_any_node(node *head, int value)
 {
     if (head == NULL)
     {
@@ -168,36 +173,30 @@ node *delete_any_node(node *head, int num, int value)
     }
     else
     {
-        node *newnode = new node(num);
+        node *pre = head;
         node *temp = head;
-        while (temp != NULL && temp->data != value)
+        while (temp->next != head && temp->data != value) // hmne poori link list traverse kr li hai pr last node ki value check ni kri bus
         {
+            pre = temp;
             temp = temp->next;
         }
-        if (temp == NULL)
+        if (temp = head) // ek hi node hai agar toh{
+        {
+            delete_begin(temp);
+        }
+        if (temp->next == head && temp->data != value) // agar(if) upar wala loop last node pe aane ki vjah se terminate ho gya hai lekin uss node ka data bhi value ke equal nai hai toh mtlb node present nai hai
         {
             cout << "node is not present";
         }
-        else if (temp == head)
+        else // last node aur normally koi bhi node dono ke case aa gye (jiski value value se match hui hogi)
         {
-            head = head->next;
+            pre->next = temp->next;
             delete temp;
-        }
-        if (temp->next == NULL)
-        {
-            temp->prev->next = NULL;
-            delete temp;
-        }
-        else
-        {
-            temp->prev->next = temp->next;
-            node *a = temp->next;
-            a->prev = temp->prev;
         }
     }
     return head;
 }
-void search(node *head, int num)
+void search(node *head, int value)
 {
     if (head == NULL)
     {
@@ -207,7 +206,7 @@ void search(node *head, int num)
     {
         node *temp = head;
         int i = 0;
-        while (temp->next != head && temp->data != num)
+        while (temp->next != head && temp->data != value)
         {
             temp = temp->next;
             i++;
