@@ -149,9 +149,12 @@ node *delete_any_node(node *head, int num, int value)
         else if (temp == head)
         {
             head = head->next;
+            delete temp;
         }
         if (temp->next == NULL)
         {
+            temp->prev->next = NULL;
+            delete temp;
         }
         else
         {
