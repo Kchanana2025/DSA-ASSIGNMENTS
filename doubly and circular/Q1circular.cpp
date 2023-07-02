@@ -66,7 +66,6 @@ node *insert_end(node *head, int num)
     node *newnode = new node(num);
     if (head == NULL)
     {
-
         newnode->next = newnode;
         head = newnode;
         return head;
@@ -85,29 +84,26 @@ node *insert_after_given_value(node *head, int num, int value)
     node *newnode = new node(num);
     if (head == NULL)
     {
+        newnode->next = newnode;
         head = newnode;
         return head;
     }
-    // hm jab if mein return kr dete hain toh neeche else likhne ki zarurat nai hoti kyunki ye understood hota hai ki
-    //  wo else hai kyunki agar if execute hua toh return ho jayega aur else execute nai hoga aur agar if ki condition
-    // false hogi tab toh if definately execute hoga
-    while (temp != NULL && temp->data != value)
-    {
-        temp = temp->next;
-    }
-    if (temp == NULL)
-        cout << "element is not present";
-    else if (temp->next == NULL)
-    {
-        temp->next = newnode;
-        newnode->prev = temp;
-    }
     else
     {
-        newnode->next = temp->next;
-        temp->next = newnode;
-        temp->next->prev = newnode;
-        newnode->prev = temp;
+        while (temp1->next ! = head && temp->data != value)
+        {
+            temp = temp->next;
+        }
+        if (temp->next == head && temp->data != value)
+        {
+            cout << "node is not present";
+        }
+
+        else // node agar last mein insert krni  hai yaa beechme ho jayegi iss code se
+        {
+            newnode->next = temp1->next;
+            temp1->next = newnode;
+        }
     }
     return head;
 }
@@ -119,15 +115,25 @@ node *delete_begin(node *head)
         cout << "link list is empty";
         return head;
     }
-    node *temp = head;
-    head = head->next;
-    if (head != NULL) // agar 1 hi node hai toh head=NULL ho jayega
+    node *temp1 = head;
+    while (temp1->next != head)
     {
-        head->prev = NULL;
+        temp1 = temp1->next;
     }
-    delete temp;
+    if (temp1 == head) // ye sare edge cases while loop ke neeche hi likha kro smjhne mein aasani hoti hai like for eg agr temp1 hai hi head toh mtlb wo aage hi badha toh mtlb it is first node
+    {                  // there is only one node
+        head = NULL
+    }
+    else
+    {
+        node *a = head;
+        head = head->next;
+        temp1->next = head; // updated head
+        delete a;
+    }
     return head;
 }
+//***************************************************
 void delete_end(node *head)
 {
     node *temp = head;
@@ -139,23 +145,19 @@ void delete_end(node *head)
 
     else
     {
-
-        while (temp->next != NULL)
+        node *pre = head;
+        node *temp = head;
+        while (temp->next != head)
         {
-            previous = temp;
+            pre = temp;
             temp = temp->next;
         }
-        if (temp == head)
+        if (temp == head) // agar ek hi node present ho
         {
             head = NULL;
-            delete temp;
         }
-        else
-        {
-            node *a = temp;
-            temp->prev->next = NULL;
-            delete a;
-        }
+        pre->next = temp->next;
+        delete temp;
     }
 }
 node *delete_any_node(node *head, int num, int value)
@@ -222,11 +224,19 @@ void search(node *head, int num)
 }
 void print(node *head)
 {
-    node *temp = head;
-    while (temp != NULL)
+    if (head == NULL)
     {
-        cout << temp->data << " ";
-        temp = temp->next;
+        cout << "Link list is empty";
+    }
+    else
+    {
+        node *temp1 = head;
+        while (temp1->next != head)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
+        temp->data << endl; // last node ka data
     }
 }
 

@@ -85,7 +85,7 @@ node *insert_after_given_value(node *head, int num, int value)
     }
     // hm jab if mein return kr dete hain toh neeche else likhne ki zarurat nai hoti kyunki ye understood hota hai ki
     //  wo else hai kyunki agar if execute hua toh return ho jayega aur else execute nai hoga aur agar if ki condition
-    // false hogi tab toh if definately execute hoga
+    // false hogi tab toh if definately execute nai hoga
     node *temp = head;
     while (temp != NULL && temp->data != value)
     {
@@ -217,11 +217,18 @@ void search(node *head, int num)
 }
 void print(node *head)
 {
-    node *temp = head;
-    while (temp != NULL)
+    if (head == NULL)
     {
-        cout << temp->data << " ";
-        temp = temp->next;
+        cout << "LINK list is empty";
+    }
+    else
+    {
+        node *temp = head;
+        while (temp != NULL)
+        {
+            cout << temp->data << " ";
+            temp = temp->next;
+        }
     }
 }
 
