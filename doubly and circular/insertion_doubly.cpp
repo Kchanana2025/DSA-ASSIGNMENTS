@@ -128,7 +128,7 @@ void delete_end(node *head)
         }
     }
 }
-void delete_any_node(node *head, int num, int value)
+node *delete_any_node(node *head, int num, int value)
 {
     if (head == NULL)
     {
@@ -146,7 +146,11 @@ void delete_any_node(node *head, int num, int value)
         {
             cout << "Node is not present";
         }
-        if (temp == head)
+        else if (temp == head)
+        {
+            head = head->next;
+        }
+        if (temp->next == NULL)
         {
         }
         else
@@ -156,6 +160,7 @@ void delete_any_node(node *head, int num, int value)
             a->prev = temp->prev;
         }
     }
+    return head;
 }
 
 void print(Node *head)
