@@ -90,7 +90,42 @@ node *delete_begin(node *head)
     }
     node *temp = head;
     head = head->next;
+    if (head != NULL) // agar 1 hi node hai toh head=NULL ho jayega
+    {
+        head->prev = NULL;
+    }
     delete temp;
+    return head;
+}
+void delete_end(node *head)
+{
+    node *temp = head;
+    if (head == NULL)
+    // 2 cheezien dekho 1)return type aur return krna hoga toh krdo nai toh mt kro 2)kya expectation hai swal ki wo expectation poori nai ho rhi hogi wo print krdo bss
+    {
+        cout << "Link list is empty";
+    }
+
+    else
+    {
+
+        while (temp->next != NULL)
+        {
+            previous = temp;
+            temp = temp->next;
+        }
+        if (temp == head)
+        {
+            head = NULL;
+            delete temp;
+        }
+        else
+        {
+            node *a = temp;
+            temp->prev->next = NULL;
+            delete a;
+        }
+    }
 }
 
 void print(Node *head)
