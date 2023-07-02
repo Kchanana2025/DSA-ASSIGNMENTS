@@ -36,39 +36,52 @@ node *takeinput()
     }
     return head;
 }
-node *insertion_beg(node *head)
+// shuru mein hi insert krte hai hmesha
+node *insertion_beg(node *head, int data)
 {
-    // node* temp=head;
-    int data;
-    cout << "ENTER DATA";
-    cin >> data;
     node *newnode = new node(data);
+    if (head == NULL)
+    {
+        head = newnode;
+        return head;
+    }
+    // node* temp=head;
     newnode->next = head;
     head = newnode;
     return head;
 }
-void insert_mid(node *head)
+
+void insert_mid(node *head, int value, int num) // value is value jiske baad insert krna hai and num is value jisko insert krna hai
 {
-    int data;
-    int position;
-    cin >> position;
-    cin >> data;
-    node *temp = head;
-    int i = 0;
-    node *newnode = new node(data);
-    while (i < position - 1) // dry run krke dekho smjh aa jayega
+    node *newnode = new node(num);
+    if (head == NULL)
+    {
+        head = newnode;
+        return head;
+    }
+    while (temp != NULL && temp->data != value)
     {
         temp = temp->next;
-        i++;
+    }
+    if (temp == NULL)
+    {
+        cout << "value to be deleted is not present";
+        return head;
     }
     newnode->next = temp->next;
     temp->next = newnode;
+    return head;
 }
-void insert_end(node *head)
+
+node *insert_end(node *head, int num)
 {
-    int data;
-    cin >> data;
-    node *newnode = new node(data);
+
+    node *newnode = new node(num);
+    if (head == NULL)
+    {
+        head = newnode;
+        return head;
+    }
 
     node *temp = head;
     while (temp->next != NULL)
@@ -76,79 +89,145 @@ void insert_end(node *head)
         temp = temp->next;
     }
     temp->next = newnode;
+    return head;
+
     // confirm krlo ye// no point of updating tail we are using tail only in inputing link list aur wahan hm tail return kr ni skte-> therefore badmein hamien ek loop toh chalana hi padhega end of link list ko reach krne ke lie direct tail nai use kr paenge
     // head toh return krna hi padhega akele tail ka kya karoge isliye poora loop chalao
+    // haan nai krte tail ke sath kuch bhi
 }
 node *deletion_beg(node *head)
 {
+    if (head == NULL)
+    {
+        cout << "LIST IS EMPTY DELETION CANT TAKE PLACE";
+        return head;
+    }
     node *temp = head;
     head = head->next;
     delete temp;
     return head;
 }
-void deletion_mid(node *head)
+void deletion_mid(node *head, int num)
 {
-    // indexes must not be 0 and end
-    node *temp = head;
-    int pos;
-    cin >> pos;
-    int j = 0;
-    while (temp != NULL && j < pos - 1)
+    if (head == NULL)
     {
-        temp = temp->next;
-        j++;
+        cout << "LIST IS EMPTY";
     }
-    if (temp != NULL && temp->next != NULL) // it should not be last node because below we have written code for index/pos=0 to pos=n-2
+    node *temp = head;
+    if (temp->data == num) // hmien ye edge case isliye lgana padh rha hai because kisi bhi node ko delete krne ke lie hmien uske peeche khada hona zruri hai agr lekin wo first node hi hui toh uske peeche kaise khade hooge?
     {
-        node *a = temp->next;
-        node *b = a->next;
-        temp->next = b;
-        delete a;
+        head = head->next;
+        delete temp;
+    }
+    else
+    {
+        while (temp->next->data != num && temp != NULL) // it should not be last node because below we have written code for index/pos=0 to pos=n-2
+        {
+            temp = temp->next;
+        }
+        if (temp == NULL)
+        {
+            cout << "NODE IS NOT PRESENT";
+        }
+        else
+        {
+            node *a = temp->next;
+            temp->next = NULL;
+            delete a;
+        }
     }
 }
-void deletion_end(node *head)
+void deletion_end(node *head, int num)
 {
+    if (head == NULL)
+        cout << "LINK LIST IS EMPTY";
+    // return head;kyu krna hai return bhai?delete ho paya ho bhi head woi rahega nai ho paya toh bhi wohi rahega
     node *temp = head;
+    if (temp->next == NULL) // only 1 node is present
+    {
+        head = NULL;
+        delete temp;
+    }
     while (temp->next->next != NULL)
     {
         temp = temp->next;
     }
     // after end of loop temp is at second last node
     node *a = temp->next;
-    if (a != NULL)
-    {
-        temp->next = a->next;
-    }
+
+    temp->next = NULL;
     delete a;
+
     // no need to update tail,its not even there in memory it was deallocated with end of take input function
 }
 void print(node *head)
 {
     node *temp = head;
-    while (temp != NULL)
+    if (head == NULL)
+        cout << "LINK LIST IS EMPTY";
+    else
     {
-        cout << temp->data << " ";
-        temp = temp->next;
-    }
-}
-void search(node *head)
-{
-    int data;
-    cin >> data;
-    node *temp = head;
-    int i = 0;
-    while (temp != NULL)
-    {
-        if (temp->data == data)
+        while (temp != NULL)
         {
-            cout << "element found";
-            break;
+            cout << temp->data << " ";
+            temp = temp->next;
         }
-        i++;
-        temp = temp->next;
     }
-    cout << "position" << i;
 }
+void search(node *head, int num)
+{
+    int flag = 0;
+    if (head == NULL)
+        cout << "LINK LIST IS EMPTY";
+    else
+    {
+        node *temp = head;
+        int i = 0;
+        while (temp != NULL)
+        {
+            if (temp->data == num)
+            {
+                cout << "element found";
+                int flag = 1;
+                break;
+            }
+            i++;
+            temp = temp->next;
+        }
+        if (flag == 1)
+        {
+            cout << "element is presnt at position:" << i; // agar i print kr rhe ho toh i toh loop khtm hone ke baad bhi print ho hi jayega flag isliye lgaya hai kyunki flag=1 hoga tabhi element present hoga
+        }
+        else
+        {
+            cout << "element not present";
+        }
+    }
+}
+void search(node *head, int num)
+{
+    if (head == NULL)
+        cout << "LINK LIST IS EMPTY";
+    else
+    {
+        node *temp = head;
+        int i = 0;
+        while (temp != NULL && temp->data != num)
+        {
+            temp = temp->next;
+            i++;
+        }
+        if (temp == NULL)
+        {
+            cout << "Element not present";
+        }
+        else
+        {
+            cout << "element present at position" << i;
+        }
+    }
+}
+
 int main()
 {
     // variable and functions defined in public section of class are accessible in int main() but functions and variables defined outside class and outside main() are inaccessible in int main()
