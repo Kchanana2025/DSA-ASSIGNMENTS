@@ -49,65 +49,51 @@ node *insert_end(node *head, int num)
     newnode->prev = temp;
     return head;
 }
-node *insert_at_random_val(node *head, int num, int value)
+node *insert_after_given_value(node *head, int num, int value)
 {
-}
-
-Node *push_front(Node *head)
-{
-    int data;
-    cin >> data;
-    Node *newnode = new Node(10);
-    // newnode->data = data; //NO NEED BECUASE IN CONTRUCTOR WE ARE ALREADY DOING THIS
-    newnode->next = head;
-    newnode->prev = NULL;
-    if (head != NULL)
+    node *newnode = new node(num);
+    if (head == NULL)
     {
-        head->prev = newnode;
+        head = newnode;
+        return head;
     }
-    head = newnode;
-    return head;
-}
-void push_after(Node *head, Node *previous)
-{
-    int data;
-    cin >> data;
-    Node *newnode = new Node(data);
-    if (previous != NULL)
+    // hm jab if mein return kr dete hain toh neeche else likhne ki zarurat nai hoti kyunki ye understood hota hai ki
+    //  wo else hai kyunki agar if execute hua toh return ho jayega aur else execute nai hoga aur agar if ki condition
+    // false hogi tab toh if definately execute hoga
+    while (temp != NULL && temp->data != value)
     {
-        newnode->next = previous->next;
-        previous->next = newnode;
+        temp = temp->next;
     }
-    newnode->prev = previous;
-    if (newnode->next != NULL)
-        newnode->next->prev = newnode;
-}
-void push_before(Node *head, Node *front)
-{
-    if (front != NULL)
+    if (temp == NULL)
+        cout << "element is not present";
+    else if (temp->next == NULL)
     {
-        cout << "next node cant be NULL";
-        return;
-    }
-    Node *newnode = new Node(10);
-
-    newnode->next = front;
-
-    newnode->prev = front->prev;
-    front->prev = newnode;
-    if (newnode->prev != NULL)
-    {
-        newnode->prev->next = newnode;
+        temp->next = newnode;
+        newnode->prev = temp;
     }
     else
     {
-        head = newnode;
+        newnode->next = temp->next;
+        temp->next = newnode;
+        temp->next->prev = newnode;
+        newnode->prev = temp;
     }
+    return head;
 }
-void_end
 
-    void
-    print(Node *head)
+node *delete_begin(node *head)
+{
+    if (head == NULL)
+    {
+        cout << "link list is empty";
+        return head;
+    }
+    node *temp = head;
+    head = head->next;
+    delete temp;
+}
+
+void print(Node *head)
 {
     Node *temp = head;
     while (temp != NULL)
@@ -116,6 +102,7 @@ void_end
         temp = temp->next;
     }
 }
+
 int main()
 {
     Node *head = new Node(20);
