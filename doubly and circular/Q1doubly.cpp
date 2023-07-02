@@ -3,16 +3,16 @@
 // phle normal code likha kro uske baad edge cases
 #include <iostream>
 using namespace std;
-class Node
+class node
 {
 public:
     int data;
     // pointer to the next node in DLL
-    Node *next;
+    node *next;
     // Pointer to previous node in DLL
-    Node *prev;
+    node *prev;
 
-    Node(int data)
+    node(int data)
     {
         this->data = data;
         this->next = NULL;
@@ -35,7 +35,7 @@ node *insert_beg(node *head, int num) // num is value whose node we wish to inse
 }
 node *insert_end(node *head, int num)
 {
-    node *head = newnode node(num);
+    node *newnode = new node(num);
     if (head == NULL)
     {
         head = newnode;
@@ -61,6 +61,7 @@ node *insert_after_given_value(node *head, int num, int value)
     // hm jab if mein return kr dete hain toh neeche else likhne ki zarurat nai hoti kyunki ye understood hota hai ki
     //  wo else hai kyunki agar if execute hua toh return ho jayega aur else execute nai hoga aur agar if ki condition
     // false hogi tab toh if definately execute hoga
+    node *temp = head;
     while (temp != NULL && temp->data != value)
     {
         temp = temp->next;
@@ -112,7 +113,6 @@ void delete_end(node *head)
 
         while (temp->next != NULL)
         {
-            previous = temp;
             temp = temp->next;
         }
         if (temp == head)
@@ -146,12 +146,12 @@ node *delete_any_node(node *head, int num, int value)
         {
             cout << "Node is not present";
         }
-        else if (temp == head)
+        else if (temp == head) // first node
         {
             head = head->next;
             delete temp;
         }
-        if (temp->next == NULL)
+        if (temp->next == NULL) // last node
         {
             temp->prev->next = NULL;
             delete temp;
@@ -190,9 +190,9 @@ void search(node *head, int num)
         }
     }
 }
-void print(Node *head)
+void print(node *head)
 {
-    Node *temp = head;
+    node *temp = head;
     while (temp != NULL)
     {
         cout << temp->data << " ";
@@ -202,7 +202,7 @@ void print(Node *head)
 
 int main()
 {
-    Node *head = new Node(20);
+    node *head = new node(20);
     print(head);
     return 0;
 }
