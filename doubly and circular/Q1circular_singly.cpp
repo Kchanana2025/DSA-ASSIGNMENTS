@@ -29,7 +29,7 @@ node *takeinput()
         {
             head = newnode;
             tail = newnode;
-            tail->next = newnode;
+            newnode->next = newnode;
         }
         else
         {
