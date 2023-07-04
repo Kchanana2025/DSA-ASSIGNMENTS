@@ -1,26 +1,24 @@
+#define MAX 100
 #include <iostream>
 #include <climits>
 using namespace std;
 class stack_using_array
 {
-    int *data;     // dyanmic stack
-    int nextindex; // top index
-    int capacity;  // total size
+    int arr[MAX];
+    int top; // top index
 
 public:
     stack_using_array(int total_size)
     {
-        data = new int[total_size]; // creating a dyanmic stack
-        nextindex = -1;             // later do it as 0
-        capacity = total_size;      // capacity is initial size and size is size at every time
+        top = -1;             // later do it as 0
     }
     int size()
     {
-        return nextindex + 1;
+        return top + 1;
     }
     bool isempty()
     {
-        if (nextindex == -1) // OR return nextindex==-1;
+        if (top == -1) // OR return top==-1;
             return true;
         else
             return false;
@@ -28,13 +26,13 @@ public:
     // insert element
     void push(int element)
     {
-        if (nextindex == capacity - 1)
+        if (top == capacity - 1)
         {
             cout << "STACK IS FULL" << endl;
             return;
         }
-        nextindex++;
-        data[nextindex] = element;
+        top++;
+        data[top] = element;
     }
     int pop()
     {
@@ -43,8 +41,8 @@ public:
             cout << "STACK IS EMPTY";
             return INT_MIN;
         }
-        int temp = data[nextindex];
-        nextindex--;
+        int temp = data[top];
+        top--;
         return temp;
     }
     int top()
@@ -54,7 +52,7 @@ public:
             cout << "STACK IS EMPTY";
             return INT_MIN;
         }
-        return data[nextindex];
+        return data[top];
     }
 };
 int main()
